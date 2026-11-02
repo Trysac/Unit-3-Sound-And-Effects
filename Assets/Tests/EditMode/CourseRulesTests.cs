@@ -71,5 +71,15 @@ namespace BalloonDash.Core.Tests
             Assert.That(WorldGravity.Scaled(1.5f), Is.EqualTo(-14.715f).Within(1e-4f));
             Assert.That(WorldGravity.Scaled(1.5f), Is.EqualTo(WorldGravity.Scaled(1.5f)));
         }
+
+        [Test]
+        public void LandingAfterACrashRaisesNoDust()
+        {
+            var runner = new RunnerState();
+            runner.TryJump();
+            runner.Crash();
+            Assert.That(runner.Land(), Is.False);
+            Assert.That(runner.OnGround, Is.True);
+        }
     }
 }

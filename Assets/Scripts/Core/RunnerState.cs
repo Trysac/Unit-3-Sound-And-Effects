@@ -18,11 +18,11 @@ namespace BalloonDash.Core
             return true;
         }
 
-        /// <summary>The runner touches the ground; true when the running dust should start.</summary>
+        /// <summary>The runner touches the ground; true when the running dust should start (never after a crash).</summary>
         public bool Land()
         {
             OnGround = true;
-            return true;
+            return !GameOver;
         }
 
         public void Crash() => GameOver = true;
