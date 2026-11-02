@@ -14,7 +14,7 @@ public class SpawnManager : MonoBehaviour
 
     void Start()
     {
-        player = FindObjectOfType<PlayerController>();
+        player = FindFirstObjectByType<PlayerController>();
         InvokeRepeating("InstantiateObstacules", startDelay, repeatDelay);
     }
     private void Update()

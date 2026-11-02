@@ -11,7 +11,7 @@ public class Obstacle : MonoBehaviour
 
     void Start()
     {
-        player = FindObjectOfType<PlayerController>();    
+        player = FindFirstObjectByType<PlayerController>();    
     }
 
 
