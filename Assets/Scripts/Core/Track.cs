@@ -116,8 +116,14 @@ namespace BalloonDash.Core
                 float until = airUntil;
                 Obstacles.RemoveAll(o => o.Kind == ObstacleKind.Bomb && o.X > at + 2f && o.X < until);
                 Pickups.RemoveAll(p => p.X > at + 2f && p.X < until && p.Y > 2.2f);
-                groundFrom = at + Tuning.AirRunway * SpeedCurve.At(at);
-                NextX = Math.Min(NextX, groundFrom);
+                // Only pull the ground in while nothing is laid out past the air stretch yet: at top
+                // speed float rounding can end the balloon a hair early after the ground beyond it is
+                // already laid, and laying it out again would stack patterns on top of each other.
+                if (NextX <= until)
+                {
+                    groundFrom = at + Tuning.AirRunway * SpeedCurve.At(at);
+                    NextX = Math.Min(NextX, groundFrom);
+                }
             }
             airUntil = float.NegativeInfinity;
         }

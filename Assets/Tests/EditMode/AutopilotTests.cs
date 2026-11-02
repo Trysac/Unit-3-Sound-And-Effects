@@ -34,6 +34,36 @@ namespace BalloonDash.Core.Tests
             }
         }
 
+        [TestCase(28, 4036f, 6251f)]
+        [TestCase(32, 4184f, 5122f)]
+        [TestCase(34, 4258f, 5145f)]
+        public void ABalloonEndingAtTopSpeedNeverLaysTheGroundTwice(int seed, float skip, float pastMetres)
+        {
+            // At top speed, float rounding can end the balloon a hair before its planned end, after the
+            // ground beyond it is already laid out. That ground must not be laid out a second time.
+            var run = new Run(seed);
+            run.Skip(skip);
+            var pilot = new Autopilot();
+            for (float t = 0f; t < 400f && !run.IsOver && run.Distance < pastMetres + 50f; t += Dt)
+            {
+                pilot.Drive(run, Dt);
+                run.Step(Dt);
+                run.ClearEvents();
+            }
+            Assert.That(run.IsOver, Is.False, $"seed {seed} ended at {run.Distance:0} m: {run.EndReason}");
+            for (int i = 0; i < run.Obstacles.Count; i++)
+            {
+                for (int j = i + 1; j < run.Obstacles.Count; j++)
+                {
+                    Obstacle a = run.Obstacles[i], b = run.Obstacles[j];
+                    if (a.Group != b.Group)
+                    {
+                        Assert.That(System.Math.Abs(a.X - b.X), Is.GreaterThan(1f), $"{a.Kind} g{a.Group} and {b.Kind} g{b.Group} overlap at {a.X:0.00}");
+                    }
+                }
+            }
+        }
+
         [Test]
         public void TheAutopilotCollectsCoinsAndPowerUpsOnTheWay()
         {
