@@ -344,10 +344,12 @@ namespace BalloonDash.Core
 
         /// <summary>
         /// Moves the run forward (the screenshot hook and tests jump ahead): the track is cleared
-        /// and laid out again from a short way in front of the runner.
+        /// and laid out again from a short way in front of the runner, and the time it would
+        /// have taken is added to the clock.
         /// </summary>
         public void Skip(float metres)
         {
+            Elapsed += metres / SpeedCurve.At(Distance + metres * 0.5f);
             Distance += metres;
             while (Distance >= nextMilestone)
             {

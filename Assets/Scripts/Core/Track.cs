@@ -93,7 +93,7 @@ namespace BalloonDash.Core
             var cleared = new List<Obstacle>();
             for (int i = Obstacles.Count - 1; i >= 0; i--)
             {
-                if (Obstacles[i].X > from + 3f && Obstacles[i].Kind != ObstacleKind.Bomb)
+                if (Obstacles[i].X > from + 3f)
                 {
                     cleared.Add(Obstacles[i]);
                     Obstacles.RemoveAt(i);
@@ -102,7 +102,8 @@ namespace BalloonDash.Core
             Pickups.RemoveAll(p => p.X > from + 3f && p.IsPowerUp);
             airUntil = until;
             groundFrom = until + Tuning.AirRunway * SpeedCurve.At(until);
-            NextX = from + 8f;
+            // The first bomb comes after a moment to get used to the balloon.
+            NextX = from + Math.Max(8f, SpeedCurve.At(from) * 0.9f);
             return cleared;
         }
 
@@ -297,15 +298,18 @@ namespace BalloonDash.Core
         void LayAir()
         {
             float x = NextX;
+            float speed = SpeedCurve.At(x);
             group++;
-            if (rng.Value() < 0.5f)
+            // No bombs in the last moments of the balloon, so the fall back down is clear.
+            bool bombsAllowed = x < airUntil - speed * 0.8f;
+            if (bombsAllowed && rng.Value() < 0.5f)
             {
                 // A bomb at a random height, sometimes a pair with a gap to fly through.
                 float y = rng.Range(1.2f, 5.6f);
                 AddObstacle(ObstacleKind.Bomb, x, y - Tuning.BombRadius);
                 if (rng.Value() < 0.35f)
                 {
-                    float other = y > 3.4f ? y - 2.6f : y + 2.6f;
+                    float other = y > 3.4f ? y - AirPairGap : y + AirPairGap;
                     AddObstacle(ObstacleKind.Bomb, x, other - Tuning.BombRadius);
                 }
             }
@@ -319,8 +323,12 @@ namespace BalloonDash.Core
                     AddPickup(PickupKind.Coin, x + (i % 3) * 0.7f, y + (i / 3) * 0.7f);
                 }
             }
-            NextX = x + rng.Range(3.5f, 6f);
+            // Far enough apart in time to climb or sink between them.
+            NextX = x + speed * rng.Range(0.4f, 0.6f);
         }
+
+        /// <summary>Centre-to-centre height of a pair of bombs: the gap between them fits the runner with room to spare.</summary>
+        public const float AirPairGap = 3.4f;
 
         // ---- Helpers ----
 
