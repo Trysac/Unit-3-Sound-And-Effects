@@ -309,8 +309,12 @@ namespace BalloonDash.Core
                 AddObstacle(ObstacleKind.Bomb, x, y - Tuning.BombRadius);
                 if (rng.Value() < 0.35f)
                 {
+                    // The second bomb goes above or below, but never down at the ground or past the ceiling.
                     float other = y > 3.4f ? y - AirPairGap : y + AirPairGap;
-                    AddObstacle(ObstacleKind.Bomb, x, other - Tuning.BombRadius);
+                    if (other >= 1.2f && other <= Tuning.FloatCeiling + 0.2f)
+                    {
+                        AddObstacle(ObstacleKind.Bomb, x, other - Tuning.BombRadius);
+                    }
                 }
             }
             else
