@@ -351,14 +351,14 @@ namespace BalloonDash.EditorTools
             color = Over(color, Palette.Hex("#ffd0b0"), Coverage(-(Length((rx - 30f) / 0.8f, (ry + 30f) / 1.3f) - 60f), aa) * 0.8f * color.a);
             color = Over(color, Color.white, Coverage(-(Length(rx - 45f, ry - 70f) - 42f), aa) * color.a);
             color = Over(color, Palette.Ink, Coverage(-(Length(rx - 60f, ry - 66f) - 21f), aa) * color.a);
-            float arm = Mathf.Abs(rx - 10f) - 18f;
-            color = Over(color, Palette.Ink, Coverage(-Mathf.Max(arm, Mathf.Abs(ry - 210f) - 60f), aa) * color.a);
+            // A raised hand holding the string.
+            color = Over(color, Palette.Ink, Coverage(-(Length(rx - 10f, ry - 190f) - 26f), aa) * color.a);
 
             // The string and the balloon.
-            float line = Mathf.Abs(x + 30f + (y - 180f) * 0.12f) - 6f;
-            color = Over(color, Palette.Text, Coverage(-Mathf.Max(line, Mathf.Abs(y - 260f) - 90f), aa) * color.a);
-            float bx = x + 70f, by = y - 360f;
-            float balloon = (Length(bx / 150f, by / 180f) - 1f) * 150f;
+            float line = Mathf.Abs(x + 30f + (y - 120f) * 0.15f) - 4f;
+            color = Over(color, Palette.Text, Coverage(-Mathf.Max(line, Mathf.Abs(y - 150f) - 40f), aa) * color.a);
+            float bx = x + 50f, by = y - 320f;
+            float balloon = (Length(bx / 135f, by / 160f) - 1f) * 135f;
             color = Over(color, Palette.Balloon, Mathf.Clamp01(1f - balloon / 90f) * 0.3f * color.a);
             if (balloon < aa)
             {

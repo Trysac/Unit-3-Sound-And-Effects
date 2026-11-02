@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65cab5e7e4a3c024aa0b31e34719abb4, type: 3}
+  m_Name: GameArt
+  m_EditorClassIdentifier: BalloonDash.Game::BalloonDash.Game.GameArt
+  Glow: {fileID: 2100000, guid: b52fa5ae06159d24ebef94808176f4ae, type: 2}
+  Puff: {fileID: 2100000, guid: 7b901d97c90dcb641b9211a308e29a54, type: 2}
+  TitleMusic: {fileID: 8300000, guid: 0d8d80a7c9fe33747bc8dc45a047af3f, type: 3}
+  RunMusic: {fileID: 8300000, guid: d30e5d44eb2e0fa429b6d49636453fe2, type: 3}
+  SkyMusic: {fileID: 8300000, guid: 34735a21f54ba874c8b0960b1e260f8d, type: 3}
+  Wind: {fileID: 8300000, guid: 1263108eb77ac194bad94e2b2a5a778b, type: 3}
+  Step: {fileID: 8300000, guid: 51353a8ebbc69c346b651cf3d802a280, type: 3}
+  Jump: {fileID: 8300000, guid: 27464e9c048f2584499a380ac1f2d50a, type: 3}
+  DoubleJump: {fileID: 8300000, guid: 3109bd010a7ccb24a830c5966247926f, type: 3}
+  Land: {fileID: 8300000, guid: d30c83bd848eea04dbc60550d5e8310d, type: 3}
+  Slide: {fileID: 8300000, guid: 48453a30fddc1484ab8155da07730311, type: 3}
+  Dive: {fileID: 8300000, guid: d9746efcf5229ea47bb1b5a97964b8e8, type: 3}
+  Coin: {fileID: 8300000, guid: a2a8a459e1e0ae046bc0e3bf6e9eea2e, type: 3}
+  BalloonUp: {fileID: 8300000, guid: 35e9dde211c12c94eb0242ae8c5d0b93, type: 3}
+  BalloonPop: {fileID: 8300000, guid: 76c678d84b560cd4a9725b810435d028, type: 3}
+  Boing: {fileID: 8300000, guid: 46e2a41aeea29514abc20e0645a44baa, type: 3}
+  Magnet: {fileID: 8300000, guid: 032f8a976db44d14383c4954ec7d97f1, type: 3}
+  ShieldUp: {fileID: 8300000, guid: e290f2423dee72944a849ee9993ded8b, type: 3}
+  ShieldBreak: {fileID: 8300000, guid: 2ab0112c182fae34ea6b006005aa8144, type: 3}
+  PowerEnd: {fileID: 8300000, guid: 4f46b91de3ec5e340ae0a1ef37c52527, type: 3}
+  Smash: {fileID: 8300000, guid: c943131c55a512d41898d7108276e1f5, type: 3}
+  Crash: {fileID: 8300000, guid: e808ef3288e87b344bed5d814914c42d, type: 3}
+  Bomb: {fileID: 8300000, guid: 4063e29e2b8ad504db2d4dee5c644194, type: 3}
+  Poof: {fileID: 8300000, guid: 5e55f83822616634f959102512b7f7be, type: 3}
+  Milestone: {fileID: 8300000, guid: fafd3503c97a6fa45add53827f5997bb, type: 3}
+  NewRecord: {fileID: 8300000, guid: ebabd3f0415d3f940b21a3ba52bc730e, type: 3}
+  GameOver: {fileID: 8300000, guid: c09536a8d270bd04db6ab5164577e97a, type: 3}
+  Go: {fileID: 8300000, guid: d0347189bbc23cc4f8930bf8dcc4ac1b, type: 3}
+  Move: {fileID: 8300000, guid: 63bdb6b1c4bdf484d9e81ae613ae3595, type: 3}
+  Select: {fileID: 8300000, guid: d30f9e8fb31a4af4d8e6fc649946ac09, type: 3}
+  Pause: {fileID: 8300000, guid: c08db7815cd750b49803b0cf08586f73, type: 3}
