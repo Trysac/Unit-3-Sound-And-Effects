@@ -2,7 +2,8 @@
     "name": "BalloonDash.Game",
     "rootNamespace": "BalloonDash.Game",
     "references": [
-        "BalloonDash.Core"
+        "BalloonDash.Core",
+        "Unity.InputSystem"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

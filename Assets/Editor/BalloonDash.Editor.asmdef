@@ -1,0 +1,19 @@
+{
+    "name": "BalloonDash.Editor",
+    "rootNamespace": "BalloonDash.EditorTools",
+    "references": [
+        "BalloonDash.Core",
+        "BalloonDash.Game"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
