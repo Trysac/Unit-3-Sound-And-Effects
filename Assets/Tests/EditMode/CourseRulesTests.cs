@@ -63,5 +63,13 @@ namespace BalloonDash.Core.Tests
             Assert.That(runner.TryJump(), Is.False);
             Assert.That(runner.OnGround, Is.True);
         }
+
+        [Test]
+        public void SceneGravityIsTheProjectGravityTimesTheModifierEveryTime()
+        {
+            Assert.That(WorldGravity.Scaled(1f), Is.EqualTo(-9.81f));
+            Assert.That(WorldGravity.Scaled(1.5f), Is.EqualTo(-14.715f).Within(1e-4f));
+            Assert.That(WorldGravity.Scaled(1.5f), Is.EqualTo(WorldGravity.Scaled(1.5f)));
+        }
     }
 }

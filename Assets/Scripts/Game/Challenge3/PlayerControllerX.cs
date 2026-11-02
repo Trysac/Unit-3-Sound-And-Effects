@@ -1,3 +1,4 @@
+using BalloonDash.Core;
 using UnityEngine;
 
 namespace BalloonDash.Game.Challenge3
@@ -24,7 +25,7 @@ namespace BalloonDash.Game.Challenge3
 
         void Start()
         {
-            Physics.gravity *= gravityModifier;
+            Physics.gravity = new Vector3(0f, WorldGravity.Scaled(gravityModifier), 0f);
             audioSource = GetComponent<AudioSource>();
             body = GetComponent<Rigidbody>();
 

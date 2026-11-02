@@ -26,7 +26,7 @@ namespace BalloonDash.Game
             body = GetComponent<Rigidbody>();
             audioSource = GetComponent<AudioSource>();
 
-            Physics.gravity *= gravityModifier;
+            Physics.gravity = new Vector3(0f, WorldGravity.Scaled(gravityModifier), 0f);
         }
 
         void Update()
