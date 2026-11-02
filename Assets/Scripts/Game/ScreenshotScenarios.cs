@@ -158,7 +158,6 @@ namespace BalloonDash.Game
                 case "powers":
                     yield return Begin(1240f, 92);
                     director.Run.Activate(PickupKind.Magnet, director.Run.Distance, 1f);
-                    director.Run.Activate(PickupKind.Shield, director.Run.Distance, 1f);
                     yield return Advance(1.1f);
                     director.Run.ClearTrack();
                     for (int i = 0; i < 6; i++)
@@ -167,7 +166,6 @@ namespace BalloonDash.Game
                     }
                     director.Run.Place(ObstacleKind.Barrel, 9f);
                     director.Run.Place(ObstacleKind.Crate, 13f);
-                    director.Run.Place(PickupKind.Shield, 7f, 1.3f);
                     yield return Advance(0.08f);
                     break;
                 case "crash":

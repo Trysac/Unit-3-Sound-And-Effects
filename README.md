@@ -14,7 +14,7 @@ on those two ideas as an original game (see [Where it came from](#where-it-came-
 | | |
 |---|---|
 | ![Title screen with the autopilot running a demo behind the menu](docs/screenshots/title.png) | ![Floating under the balloon between bombs and a cloud of coins](docs/screenshots/balloon.png) |
-| ![Sliding under a hanging sign, with a stack of crates ahead](docs/screenshots/slide.png) | ![The magnet pulling in coins while the shield is up](docs/screenshots/powers.png) |
+| ![Sliding under a hanging sign, with a stack of crates ahead](docs/screenshots/slide.png) | ![The magnet pulling in coins](docs/screenshots/powers.png) |
 | ![Results after crashing into a barrel, with a new best score](docs/screenshots/crash.png) | ![How to play: every control and what every obstacle needs](docs/screenshots/howto.png) |
 
 ## Run it
@@ -56,7 +56,7 @@ or, without a player,
 | Jump (again in the air for a double jump) | Space, W, ↑ or left click | Tap the right side of the screen | A, RB or RT |
 | Short hop | Let go of jump early | Lift the finger early | Let go early |
 | Rise under the balloon | Hold jump | Hold the right side | Hold A |
-| Slide (in the air: dive, then slide) | S, ↓, Shift, Ctrl or right click | Tap the left side, or swipe down | B, X, LB, LT, d-pad or stick down |
+| Slide (in the air: dive, then slide) | S, ↓, Left Shift, Left Ctrl or right click | Tap the left side, or swipe down | B, X, LB, LT, d-pad or stick down |
 | Pause | Esc or P | The ❚❚ button at the top right | Start |
 | Menus | ↑ / ↓ to choose, ← / → to change a value, Enter to select, Esc to go back; or click a row | Tap a row | D-pad or stick, A to select, B to go back |
 | Mute | M | Settings → Sound | Settings → Sound |
@@ -72,7 +72,7 @@ or, without a player,
 - **Speed** starts at 9 m/s and eases towards 22 m/s; it is halfway there at about 620 m.
 - **Score** is one point per metre plus ten per coin. Coins come in arcs over obstacles, in
   lines on the ground and up where a jump reaches.
-- **Power-ups** appear every 380 to 560 m, never while one is running. The **balloon** (from
+- **Power-ups** appear every 380 to 560 m, never while one is running or a shield is held. The **balloon** (from
   Challenge 3) lifts you for 7 seconds: hold jump to rise, let go to sink, bounce off the
   ground; the ground obstacles ahead vanish and bombs and coin clouds fill the sky instead. The
   **magnet** pulls in coins within 4 m for 8 seconds. The **shield** takes one hit and smashes
@@ -86,7 +86,7 @@ or, without a player,
 - **Rules without the engine.** The runner's motion (jump buffer, double jump, short hop,
   slide, dive, balloon float), the seeded track, the speed curve, scoring, power-ups, records
   and settings live in `Assets/Scripts/Core`, a plain C# assembly with no Unity references,
-  covered by 48 deterministic EditMode tests. They check things like "every gap between
+  covered by 51 deterministic EditMode tests. They check things like "every gap between
   patterns is a full jump plus reaction time at the speed it is reached, on 40 seeds" and "a
   jump pressed 0.08 s before landing fires on landing, one pressed 0.3 s before does not".
 - **An autopilot as a fairness test.** `Autopilot` plays the game through the same buttons as
