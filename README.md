@@ -17,6 +17,16 @@ on those two ideas as an original game (see [Where it came from](#where-it-came-
 | ![Sliding under a hanging sign, with a stack of crates ahead](docs/screenshots/slide.png) | ![The magnet pulling in coins](docs/screenshots/powers.png) |
 | ![Results after crashing into a barrel, with a new best score](docs/screenshots/crash.png) | ![How to play: every control and what every obstacle needs](docs/screenshots/howto.png) |
 
+## Play it
+
+- **In your browser:** [trysac.github.io/Unit-3-Sound-And-Effects](https://trysac.github.io/Unit-3-Sound-And-Effects/)
+- **On itch.io:** [trysac.itch.io/balloon-dash](https://trysac.itch.io/balloon-dash)
+- **Get the code:** fork this repository, or clone it:
+
+  ```bash
+  git clone https://github.com/Trysac/Unit-3-Sound-And-Effects.git
+  ```
+
 ## Run it
 
 1. Install **Unity 6000.3.27f1 (Unity 6 LTS)** with Unity Hub (add the Windows or Web build
