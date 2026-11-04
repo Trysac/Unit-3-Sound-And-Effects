@@ -5,6 +5,8 @@ double-jump stacks and rolling barrels, collect coins, and grab a balloon to flo
 track between bombs. The track speeds up the further you run; one hit ends the run. Plays with
 a keyboard, a mouse, a gamepad or a touch screen.
 
+![Gameplay](docs/media/gameplay.gif)
+
 It started in 2021 as my take on **Unit 3 "Sound and Effects" of the Unity Learn Junior
 Programmer pathway** (Prototype 3, the runner, and Challenge 3, the balloon), and was rebuilt
 on those two ideas as an original game (see [Where it came from](#where-it-came-from)).
