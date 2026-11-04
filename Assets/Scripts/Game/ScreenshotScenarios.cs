@@ -13,6 +13,9 @@ namespace BalloonDash.Game
     /// (which have no command line) are unaffected. The same hook runs inside the editor
     /// (ProjectBuilder.CaptureScreenshots), which renders the camera and the HUD off screen and
     /// blends them, for machines that cannot run the player.
+    /// With <c>-frames N -fps F</c> each scenario is recorded instead as N numbered frames
+    /// (<c>&lt;folder&gt;/&lt;scenario&gt;/frame_0000.png</c>) at a fixed timestep of 1/F seconds;
+    /// the <c>gameplay</c> scenario lets the autopilot play a run for the README GIF.
     /// </summary>
     public sealed class ScreenshotScenarios : MonoBehaviour
     {
@@ -25,6 +28,9 @@ namespace BalloonDash.Game
         RenderTexture sceneTarget;
         RenderTexture uiTarget;
         GameDirector director;
+        int frames;
+        int fps = 15;
+        Autopilot pilot;
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
         static void StartWhenRequested()
@@ -37,6 +43,11 @@ namespace BalloonDash.Game
             var host = new GameObject(nameof(ScreenshotScenarios)).AddComponent<ScreenshotScenarios>();
             host.folder = target;
             host.scenarios = (Argument("-scenario") ?? DefaultScenarios).Split(',');
+            int.TryParse(Argument("-frames"), out host.frames);
+            if (int.TryParse(Argument("-fps"), out int rate) && rate > 0)
+            {
+                host.fps = rate;
+            }
         }
 
         IEnumerator Start()
@@ -54,6 +65,13 @@ namespace BalloonDash.Game
                 string scenario = raw.Trim();
                 director.Seed(StableSeed(scenario));
                 yield return Stage(scenario);
+                if (frames > 0)
+                {
+                    yield return Record(scenario);
+                    director.ScriptedInput = false;
+                    director.Frozen = false;
+                    continue;
+                }
                 Texture2D shot;
                 if (Application.isEditor)
                 {
@@ -189,10 +207,52 @@ namespace BalloonDash.Game
                     director.TogglePause();
                     yield return new WaitForSecondsRealtime(0.6f);
                     break;
+                case "gameplay":
+                    yield return Begin(380f, 24);
+                    director.Run.Laying = true;
+                    pilot = new Autopilot();
+                    director.Frozen = false;
+                    break;
                 default:
                     Debug.LogWarning($"Unknown screenshot scenario '{scenario}'.");
                     break;
             }
+        }
+
+        /// <summary>Writes <see cref="frames"/> frames of the scenario at a fixed timestep.</summary>
+        IEnumerator Record(string scenario)
+        {
+            string target = Path.Combine(folder, scenario);
+            Directory.CreateDirectory(target);
+            Time.captureFramerate = fps;
+            for (int i = 0; i < frames; i++)
+            {
+                if (scenario == "gameplay" && pilot != null && director.Run != null)
+                {
+                    // A balloon a little after the start, so the run shows jumps and a float.
+                    if (i == Mathf.RoundToInt(fps * 1.6f))
+                    {
+                        director.Run.Place(PickupKind.Balloon, director.Run.Speed * 0.9f, 1.1f);
+                    }
+                    pilot.Drive(director.Run, 1f / fps);
+                }
+                yield return null;
+                Texture2D shot;
+                if (Application.isEditor)
+                {
+                    shot = CaptureOffscreen();
+                }
+                else
+                {
+                    yield return new WaitForEndOfFrame();
+                    shot = ScreenCapture.CaptureScreenshotAsTexture();
+                }
+                File.WriteAllBytes(Path.Combine(target, $"frame_{i:0000}.png"), shot.EncodeToPNG());
+                Destroy(shot);
+            }
+            Time.captureFramerate = 0;
+            pilot = null;
+            Debug.Log($"Saved {frames} frames of {scenario}");
         }
 
         /// <summary>Starts a run partway in, with nothing on the track and some coins already collected.</summary>
